@@ -3,38 +3,38 @@ from django.views import View
 import json
 from datetime import datetime
 
-from django.http import JsonResponse, HttpResponse, HttpResponseForbidden, Http404
+from django.http import JsonResponse, Http404
 from .models import Todo
 
 
 class ToDoList(View):
 
     def get(self, request, *args, **kwargs):  # done
-        return JsonResponse(list(Todo.objects.filter().values()), safe=False) # костыль
+        return JsonResponse(list(Todo.objects.filter().values()), safe=False)  # костыль
 
     def post(self, request, *args, **kwargs):  # done
         time = datetime.now().replace(microsecond=0)
-        get_inf = (json.loads(str(request.body, encoding='utf-8')))['currTodo']  # мб тоже костыль( надо ли приобразовывать к строке перед loads)
-        temp = Todo(text=get_inf['text'], isDone=False, creationDate=time, lastUpdate=time)
+        todo = json.loads(request.body)
+        temp = Todo(text=todo['text'], isDone=False, creationDate=time, lastUpdate=time)
         temp.save()
         return JsonResponse(list(Todo.objects.filter(creationDate=time).values()), safe=False)  # костыль
 
     def put(self, request, *args, **kwargs):  # done
-        inf_for_update = (json.loads(str(request.body, encoding='utf-8')))['currTodo']
+        todo = json.loads(request.body)
         try:
-            todo_from_base = Todo.objects.get(id=inf_for_update['id'])
-            todo_from_base.text = inf_for_update['text']
-            todo_from_base.isDone = inf_for_update['isDone']
-            todo_from_base.lastUpdate = datetime.now().replace(microsecond=0)
-            todo_from_base.save()
-            return JsonResponse(list(Todo.objects.filter(id=inf_for_update['id']).values()), safe=False)  # костыль
+            todo_from_db = Todo.objects.get(id=todo['id'])
+            todo_from_db.text = todo['text']
+            todo_from_db.isDone = todo['isDone']
+            todo_from_db.lastUpdate = datetime.now().replace(microsecond=0)
+            todo_from_db.save()
+            return JsonResponse(list(Todo.objects.filter(id=todo['id']).values()))  # костыль
         except Todo.DoesNotExist:
             return Http404()
 
     def delete(self, request, *args, **kwargs):  # done
-        inf_for_delete = (json.loads(str(request.body, encoding='utf-8')))['currTodo']  # мб тоже костыль( надо ли приобразовывать к строке перед loads)
+        todo = json.loads(request.body)
         try:
-            Todo.objects.get(id=inf_for_delete['id']).delete()
+            Todo.objects.get(id=todo['id']).delete()
             return JsonResponse(True, safe=False)
         except Todo.DoesNotExist:
             return JsonResponse(False, safe=False)
