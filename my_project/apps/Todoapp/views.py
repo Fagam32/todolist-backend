@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse
 from django.views import View
 
 from .models import Todo
@@ -30,7 +30,7 @@ class ToDoList(View):
             todo_from_db.lastUpdate = datetime.now().replace(microsecond=0)
             todo_from_db.save()
             updated_todo = list(Todo.objects.filter(id=todo['id']).values())
-            return JsonResponse(updated_todo)  # костыль
+            return JsonResponse(updated_todo, safe=False)
         except Todo.DoesNotExist:
             return JsonResponse(None, safe=False, status=404)
 
