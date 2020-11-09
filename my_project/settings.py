@@ -38,8 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'Todoapp',
     'Authorization',
+    'rest_framework.authtoken',
     'django.contrib.staticfiles',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
