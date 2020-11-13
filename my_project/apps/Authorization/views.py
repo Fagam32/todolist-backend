@@ -30,12 +30,9 @@ class Authorize(View):
         user = authenticate(request, username=credentials['email'], password=credentials['password'])
         if user:
             token = Token.objects.get(user=user)
-            if token:
-                response = {"roles": ["USER"], "token": "Bearer " + token.key}
-                return JsonResponse(response, safe=False, status=200)
-            else:
+            if not token:
                 token = Token.objects.create(user=user)
-                response = {"roles": ["USER"], "token": "Bearer " + token.key}
-                return JsonResponse(response, safe=False, status=200)
+            response = {"roles": ["USER"], "token": "Bearer " + token.key}
+            return JsonResponse(response, safe=False, status=200)
         else:
             return JsonResponse("User no found", safe=False, status=404)
