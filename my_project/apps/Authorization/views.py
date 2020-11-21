@@ -6,20 +6,31 @@ import json
 from django.http import JsonResponse
 from django.db.utils import IntegrityError
 from rest_framework.authtoken.models import Token
+import sys
+
+def check_email(string):
+    if '@' not in string:
+        return False
+    else:
+        return (' ' not in string) and ('@.' not in string) and (string.find('.', string.find('@')) != -1)
+
 
 
 class Registration(View):
 
     def post(self, request, *args, **kwargs):
         getting_data = json.loads(request.body)
-        # TODO remove password from cheсking on uniq
         try:
+            if not check_email(getting_data['email']):
+                print('ololo')
+                return JsonResponse("", safe=False, status=400)
             User.objects.create_user(username=getting_data['email'], first_name=getting_data['name'],
                                      last_name=getting_data['surname'],
                                      email=getting_data['email'], password=getting_data['password'])
             return JsonResponse("", safe=False, status=200)
         except IntegrityError:  # если какой-то параметр не уникален
-
+            print("dima")
+            print(sys.exc_info())
             return JsonResponse("", safe=False, status=400)
 
 
