@@ -22,15 +22,12 @@ class Registration(View):
         getting_data = json.loads(request.body)
         try:
             if not check_email(getting_data['email']):
-                print('ololo')
                 return JsonResponse("", safe=False, status=400)
             User.objects.create_user(username=getting_data['email'], first_name=getting_data['name'],
                                      last_name=getting_data['surname'],
                                      email=getting_data['email'], password=getting_data['password'])
             return JsonResponse("", safe=False, status=200)
         except IntegrityError:  # если какой-то параметр не уникален
-            print("dima")
-            print(sys.exc_info())
             return JsonResponse("", safe=False, status=400)
 
 
