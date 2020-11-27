@@ -1,5 +1,6 @@
-1. Скачайте проект
-2. В командной строке перейдите в директорию главного проекта(C:\Users\User\Desktop\ToDo-main>)
-3. Пропишите команду(вместо python может быть python3):> pip install django-cors-headers
-4. сделайте миграции командой(вместо python может быть python3):> python manage.py migrate
-5. Запустите проект командой:> python manage.py runserver
+1. git clone '''ссылочка на проект'''
+перейдите в директорию скаченного проекта
+2. pip install -r requirements.txt
+(вместо python3 может быть python)
+3. python3 manage.py migrate
+4. python3 manage.py runserver
