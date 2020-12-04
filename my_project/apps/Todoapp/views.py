@@ -29,7 +29,7 @@ class ToDoList(View):
         temp = Todo(text=todo['text'], isDone=False, creationDate=time, lastUpdate=time, user=user)
         temp.save()
         added_todo = list(Todo.objects.filter(creationDate=time).values())
-        return JsonResponse(added_todo, safe=False)
+        return JsonResponse(added_todo, safe=False, status=201)
 
     def put(self, request, *args, **kwargs):
         todo = json.loads(request.body)

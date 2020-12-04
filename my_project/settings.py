@@ -11,12 +11,15 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from sys import path as spath
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# from my_project.apps import Todoapp
+from my_project.apps import Authorization
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(__file__)
-spath.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -27,8 +30,11 @@ SECRET_KEY = '7^gx^44frrllx^a+dq+_jce&926q_^1b=9zh7+mx6tb+*b8802'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = []
+
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
+
 INSTALLED_APPS = [
     'corsheaders',
     'django.contrib.admin',
@@ -36,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'Todoapp',
-    'Authorization',
+    'Todoapp.apps.TodoappConfig',
+    'Authorization.apps.AuthorizationConfig',
     'rest_framework.authtoken',
     'django.contrib.staticfiles',
 ]
@@ -81,7 +87,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'my_project.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/2.2/ref/s   ettings/#databases
 
 DATABASES = {
     'default': {

@@ -31,6 +31,7 @@ class Authorize(View):
     def post(self, request, *args, **kwargs):
         credentials = json.loads(request.body)
         user = authenticate(request, username=credentials['email'], password=credentials['password'])
+        print(User.objects.all())
         if user:
             token = Token.objects.get_or_create(user=user)
             response = {"roles": ["USER"], "token": "Bearer " + str(token[0])}
