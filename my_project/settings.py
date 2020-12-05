@@ -12,12 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import sys
-import django_heroku
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # from my_project.apps import Todoapp
 from my_project.apps import Authorization
-
-django_heroku.settings(locals())
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(__file__)
@@ -94,12 +92,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'my_project.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/2.2/ref/s   ettings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'dcspak3rv6g6fq',
+        'HOST': 'postgres://oxteukxvhnqrud:aacb905974ee8b60a443d462eb0bacbced6d91411d26d0f6fba4f9c55b1200a8@ec2-46-137-84-140.eu-west-1.compute.amazonaws.com:5432/',
+        'PORT': '5432',
+        'USER': 'oxteukxvhnqrud',
+        'PASSWORD': 'aacb905974ee8b60a443d462eb0bacbced6d91411d26d0f6fba4f9c55b1200a8'
+
     }
 }
 
