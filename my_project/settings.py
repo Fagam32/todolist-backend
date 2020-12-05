@@ -39,6 +39,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = [
+    # 'social.apps.django_app.default',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
