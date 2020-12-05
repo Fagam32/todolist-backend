@@ -33,7 +33,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '4J5W8TjO-pd90sItgjGo_rGv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["evernotesucks-backend.herokuapp.com", "https://evernotesucks-backend.herokuapp.com",
+                 "https://evernotesucks-frontend.herokuapp.com", "evernotesucks-frontend.herokuapp.com"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
