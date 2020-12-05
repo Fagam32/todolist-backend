@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from django.contrib.auth.models import User
+
 from django.http import JsonResponse
 from django.views import View
 from rest_framework.authtoken.models import Token
