@@ -27,6 +27,9 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '7^gx^44frrllx^a+dq+_jce&926q_^1b=9zh7+mx6tb+*b8802'
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '218202264446-47j0shdvhan9vrmv814nvn4dl52mgir8.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '4J5W8TjO-pd90sItgjGo_rGv'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
